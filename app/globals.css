@@ -684,6 +684,18 @@ input:focus-visible {
 }
 
 .game-hub-copy {
+
+.game-hub-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.game-hub-side .hub-artwork {
+  margin-bottom: 0;
+}
+
   min-width: 0;
 }
 

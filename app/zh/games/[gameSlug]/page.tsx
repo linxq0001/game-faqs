@@ -114,26 +114,28 @@ export default async function ZhGameHubPage({ params }: GamePageProps) {
                   <dd>{game.updatedAt}</dd>
                 </div>
               </dl>
+            </div>
 
-              <div className="detail-actions">
-                <a href={game.steamUrl} target="_blank" rel="noreferrer">
-                  打开 Steam 页面
-                </a>
-              </div>
+            <div className="game-hub-side">
+              {game.artwork ? (
+                <figure className="hub-artwork pixel-frame">
+                  <img src={game.artwork.src} alt={game.artwork.alt} />
+                  <figcaption>{game.artwork.caption}</figcaption>
+                </figure>
+              ) : null}
 
               <div className="tag-row detail-tags" aria-label={`${game.title} tags`}>
                 {game.tags.map((tag) => (
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
-            </div>
 
-            {game.artwork ? (
-              <figure className="hub-artwork pixel-frame">
-                <img src={game.artwork.src} alt={game.artwork.alt} />
-                <figcaption>{game.artwork.caption}</figcaption>
-              </figure>
-            ) : null}
+              <div className="detail-actions">
+                <a href={game.steamUrl} target="_blank" rel="noreferrer">
+                  打开 Steam 页面
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
