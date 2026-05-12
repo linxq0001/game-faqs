@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GuideCard } from "./GuideCard";
 import type { GuideWithGame } from "@/lib/types";
 
@@ -12,6 +12,12 @@ export function SearchFilter({
   locale?: string;
 }) {
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q) setQuery(q);
+  }, []);
 
   const filtered = query.trim()
     ? guides.filter(
