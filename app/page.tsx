@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { JsonLd } from "@/components/JsonLd";
-import { homeJsonLd } from "@/lib/structured-data";
 import { DirectAnswer } from "@/components/DirectAnswer";
 import { GuideCard } from "@/components/GuideCard";
 import { IntentFilter } from "@/components/IntentFilter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SearchFilter } from "@/components/SearchFilter";
+import { JsonLd } from "@/components/JsonLd";
+import { homeJsonLd } from "@/lib/structured-data";
 import { getAllRenderedPublishedGuides, getGuideUrl } from "@/lib/content";
 import { getGuideDisplayTitle } from "@/lib/guide-title";
 
@@ -22,23 +23,8 @@ export const metadata: Metadata = {
   }
 };
 
-export default async function HomePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const allGuides = await getAllRenderedPublishedGuides();
-  const { q } = await searchParams;
-  const query = q?.trim().toLowerCase() ?? "";
-  const guides = query
-    ? allGuides.filter(
-        (g) =>
-          g.title.toLowerCase().includes(query) ||
-          g.summary.toLowerCase().includes(query) ||
-          g.game.title.toLowerCase().includes(query) ||
-          g.type.toLowerCase().includes(query)
-      )
-    : allGuides;
+export default async function HomePage() {
+  const guides = await getAllRenderedPublishedGuides();
   const featuredGuide = guides[0];
   const readingLinks = guides.slice(0, 4);
 
@@ -101,17 +87,10 @@ export default async function HomePage({
         <IntentFilter guides={guides} />
 
         <div>
-          <div className="section-title">
-            <span>{query ? `Search: "${q}"` : "Browse Guide Index"}</span>
-            <span>{guides.length} results</span>
-          </div>
-          <div className="guide-grid">
-            {guides.map((guide) => (
-              <GuideCard key={`${guide.game.slug}-${guide.slug}`} guide={guide} />
-            ))}
-          </div>
+          <SearchFilter guides={guides} />
         </div>
       </section>
+
       <JsonLd data={homeJsonLd()} />
     </main>
   );

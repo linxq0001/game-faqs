@@ -4,10 +4,11 @@ import { DirectAnswer } from "@/components/DirectAnswer";
 import { GuideCard } from "@/components/GuideCard";
 import { IntentFilter } from "@/components/IntentFilter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { getAllRenderedPublishedGuides, getGuideUrl } from "@/lib/content";
-import { getGuideDisplayTitle } from "@/lib/guide-title";
+import { SearchFilter } from "@/components/SearchFilter";
 import { JsonLd } from "@/components/JsonLd";
 import { homeJsonLd } from "@/lib/structured-data";
+import { getAllRenderedPublishedGuides, getGuideUrl } from "@/lib/content";
+import { getGuideDisplayTitle } from "@/lib/guide-title";
 
 const LOCALE = "zh";
 
@@ -29,23 +30,8 @@ export const metadata: Metadata = {
   }
 };
 
-export default async function ZhHomePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const allGuides = await getAllRenderedPublishedGuides(LOCALE);
-  const { q } = await searchParams;
-  const query = q?.trim().toLowerCase() ?? "";
-  const guides = query
-    ? allGuides.filter(
-        (g) =>
-          g.title.toLowerCase().includes(query) ||
-          g.summary.toLowerCase().includes(query) ||
-          g.game.title.toLowerCase().includes(query) ||
-          g.type.toLowerCase().includes(query)
-      )
-    : allGuides;
+export default async function ZhHomePage() {
+  const guides = await getAllRenderedPublishedGuides(LOCALE);
   const featuredGuide = guides[0];
   const readingLinks = guides.slice(0, 4);
 
@@ -107,15 +93,7 @@ export default async function ZhHomePage({
         <IntentFilter guides={guides} />
 
         <div>
-          <div className="section-title">
-            <span>{query ? `搜索: "${q}"` : "浏览攻略索引"}</span>
-            <span>{guides.length} 个结果</span>
-          </div>
-          <div className="guide-grid">
-            {guides.map((guide) => (
-              <GuideCard key={`${guide.game.slug}-${guide.slug}`} guide={guide} locale="zh" />
-            ))}
-          </div>
+          <SearchFilter guides={guides} locale="zh" />
         </div>
       </section>
 

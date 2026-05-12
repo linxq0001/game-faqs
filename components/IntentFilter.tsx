@@ -1,4 +1,4 @@
-import type { GuideWithGame } from "@/lib/content";
+import type { GuideWithGame } from "@/lib/types";
 
 const labels: Record<string, string> = {
   beginner: "Beginner",

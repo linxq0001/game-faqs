@@ -1,6 +1,6 @@
 import Link from "next/link";
-import type { GuideWithGame } from "@/lib/content";
-import { getGuideUrl } from "@/lib/content";
+import type { GuideWithGame } from "@/lib/types";
+import { getGuideUrl } from "@/lib/types";
 import { getGuideDisplayTitle } from "@/lib/guide-title";
 import { StatusBadge } from "./StatusBadge";
 
