@@ -978,7 +978,7 @@ input:focus-visible {
   overflow: hidden;
   border: 1px solid rgba(102, 211, 154, 0.28);
   background: #0a0d09;
-  margin-bottom: 24px;
+  margin-bottom: 0;
   aspect-ratio: 16 / 9;
   max-height: 480px;
 }

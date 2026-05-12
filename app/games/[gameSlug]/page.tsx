@@ -80,6 +80,13 @@ export default async function GameHubPage({ params }: GamePageProps) {
     <main className="wrap">
       <SiteHeader />
 
+      {game.artwork ? (
+        <figure className="hub-hero pixel-frame">
+          <img src={game.artwork.src} alt={game.artwork.alt} />
+          <figcaption>{game.artwork.caption}</figcaption>
+        </figure>
+      ) : null}
+
       <section className="detail-shell" aria-labelledby="game-title">
         <div className="detail-paper game-hub-paper">
           <div className="breadcrumb">
@@ -89,13 +96,6 @@ export default async function GameHubPage({ params }: GamePageProps) {
             <span>/</span>
             <span>{game.title}</span>
           </div>
-
-          {game.artwork ? (
-            <figure className="hub-hero pixel-frame">
-              <img src={game.artwork.src} alt={game.artwork.alt} />
-              <figcaption>{game.artwork.caption}</figcaption>
-            </figure>
-          ) : null}
 
           <div className="game-hub-body">
             <StatusBadge>{game.coverageStatus}</StatusBadge>
