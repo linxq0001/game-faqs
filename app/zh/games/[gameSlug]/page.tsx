@@ -90,51 +90,47 @@ export default async function ZhGameHubPage({ params }: GamePageProps) {
             <span>{game.title}</span>
           </div>
 
-          <div className="game-hub-overview">
-            <div className="game-hub-copy">
-              <StatusBadge>{game.coverageStatus}</StatusBadge>
-              <h1 id="game-title">{game.title}</h1>
-              <p className="detail-summary">{game.summary}</p>
+          {game.artwork ? (
+            <figure className="hub-hero pixel-frame">
+              <img src={game.artwork.src} alt={game.artwork.alt} />
+              <figcaption>{game.artwork.caption}</figcaption>
+            </figure>
+          ) : null}
 
-              <dl className="detail-meta-grid" aria-label={`${game.title} details`}>
-                <div>
-                  <dt>收录状态</dt>
-                  <dd>{game.coverageStatus}</dd>
-                </div>
-                <div>
-                  <dt>Steam AppID</dt>
-                  <dd>{game.appid}</dd>
-                </div>
-                <div>
-                  <dt>发布日期</dt>
-                  <dd>{game.releaseDate}</dd>
-                </div>
-                <div>
-                  <dt>更新于</dt>
-                  <dd>{game.updatedAt}</dd>
-                </div>
-              </dl>
+          <div className="game-hub-body">
+            <StatusBadge>{game.coverageStatus}</StatusBadge>
+            <h1 id="game-title">{game.title}</h1>
+            <p className="detail-summary">{game.summary}</p>
+
+            <dl className="detail-meta-grid" aria-label={`${game.title} details`}>
+              <div>
+                <dt>收录状态</dt>
+                <dd>{game.coverageStatus}</dd>
+              </div>
+              <div>
+                <dt>Steam AppID</dt>
+                <dd>{game.appid}</dd>
+              </div>
+              <div>
+                <dt>发布日期</dt>
+                <dd>{game.releaseDate}</dd>
+              </div>
+              <div>
+                <dt>更新于</dt>
+                <dd>{game.updatedAt}</dd>
+              </div>
+            </dl>
+
+            <div className="tag-row detail-tags" aria-label={`${game.title} tags`}>
+              {game.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
             </div>
 
-            <div className="game-hub-side">
-              {game.artwork ? (
-                <figure className="hub-artwork pixel-frame">
-                  <img src={game.artwork.src} alt={game.artwork.alt} />
-                  <figcaption>{game.artwork.caption}</figcaption>
-                </figure>
-              ) : null}
-
-              <div className="tag-row detail-tags" aria-label={`${game.title} tags`}>
-                {game.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-
-              <div className="detail-actions">
-                <a href={game.steamUrl} target="_blank" rel="noreferrer">
-                  打开 Steam 页面
-                </a>
-              </div>
+            <div className="detail-actions">
+              <a href={game.steamUrl} target="_blank" rel="noreferrer">
+                打开 Steam 页面
+              </a>
             </div>
           </div>
         </div>

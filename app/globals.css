@@ -971,3 +971,71 @@ input:focus-visible {
     font-size: 24px;
   }
 }
+
+/* --- Single-column game hub --- */
+.hub-hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(102, 211, 154, 0.28);
+  background: #0a0d09;
+  margin-bottom: 24px;
+  aspect-ratio: 21 / 9;
+  max-height: 420px;
+}
+
+.hub-hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.02) brightness(0.92);
+}
+
+.hub-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(9, 12, 8, 0.04), rgba(9, 12, 8, 0.38)),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+.hub-hero::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(102, 211, 154, 0.14);
+  pointer-events: none;
+}
+
+.hub-hero figcaption {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 1;
+  max-width: calc(100% - 20px);
+  margin: 0;
+  color: rgba(244, 236, 216, 0.9);
+  font-size: 10px;
+  line-height: 1.45;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.66);
+}
+
+.game-hub-body {
+  max-width: 760px;
+}
+
+@media (max-width: 900px) {
+  .hub-hero {
+    aspect-ratio: 16 / 9;
+    max-height: 320px;
+  }
+}
