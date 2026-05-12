@@ -979,16 +979,13 @@ input:focus-visible {
   border: 1px solid rgba(102, 211, 154, 0.28);
   background: #0a0d09;
   margin: 0 auto 24px;
-  aspect-ratio: 16 / 9;
-  max-height: 480px;
   width: 100%;
 }
 
 .hub-hero img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   filter: saturate(0.92) contrast(1.02) brightness(0.92);
 }
 
@@ -1035,9 +1032,4 @@ input:focus-visible {
   max-width: 100%;
 }
 
-@media (max-width: 900px) {
-  .hub-hero {
-    aspect-ratio: 4 / 3;
-    max-height: 360px;
-  }
-}
+
