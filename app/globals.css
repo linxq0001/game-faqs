@@ -791,7 +791,7 @@ input:focus-visible {
 }
 
 .hub-artwork {
-  align-self: stretch;
+  max-width: 100%;
   aspect-ratio: 16 / 10;
 }
 
